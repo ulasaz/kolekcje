@@ -85,6 +85,7 @@ public class Person {
 	private String lastName;
 	private int birthYear;
 	private PersonJob job;
+
  
 	
 	public Person(String first_name, String last_name) throws PersonException {
@@ -96,6 +97,14 @@ public class Person {
 	
 	public String getFirstName() {
 		return firstName;
+	}
+
+	public boolean isAdult() {
+		if (birthYear == 0) {
+			return false; // Nieznany rok urodzenia traktujemy jako brak możliwości ustalenia pełnoletności
+		}
+		int currentYear = 2024;
+		return (currentYear - birthYear) >= 18;
 	}
 
 	
@@ -169,11 +178,11 @@ public class Person {
 
 	
 	@Override
-	public String toString() {  
+	public String toString() {
 		return firstName + " " + lastName;
 	}
-	
-	
+
+
 	public static void printToFile(PrintWriter writer, Person person){
 		writer.println(person.firstName + "#" + person.lastName + 
 				"#" + person.birthYear + "#" + person.job);
